@@ -12,7 +12,6 @@ Also include the libraries for the sensors and modify any eventual difference in
 char *wifi_name() {
   return "**"; // wifi name
 }
-
 char *wifi_PWD() {
   return "**"; // wifi password
 }
@@ -40,5 +39,6 @@ char *iNFLUXDB_URL();
 char *iNFLUXDB_TOKEN();
 char *iNFLUXDB_ORG();
 char *iNFLUXDB_BUCKET();
+
 #endif
 ```
