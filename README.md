@@ -1,1 +1,2 @@
-# sensor-esp32
+# Bunch of sensors for Esp32
+# With OTA updates
