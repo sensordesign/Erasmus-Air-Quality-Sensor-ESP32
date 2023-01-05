@@ -1,7 +1,8 @@
-# Bunch of sensors for Esp32
-# With OTA updates
-## Before Compiling to arduino create 2 files named credentials.h and credentials.cpp using the following structure
+# Sensors pack for Esp32 With OTA updates via WEB
 
+## Before Compiling and uploading to Arduino
+Create 2 files named credentials.h and credentials.cpp and put them in src/confidentials/
+Those files need to be created using the following structures
 ### credentials.cpp
 ```
 #include "credentials.h"
