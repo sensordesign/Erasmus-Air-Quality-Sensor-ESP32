@@ -2,6 +2,7 @@
 
 ## Before Compiling and uploading to Arduino
 Create 2 files named credentials.h and credentials.cpp and put them in src/confidentials/
+The asterisk is where you should input your own information
 Those files need to be created using the following structures
 ### credentials.cpp
 ```
@@ -30,7 +31,6 @@ char *iNFLUXDB_BUCKET(){
 ```
 ### credentials.h
 ```
-
 #ifndef credentials
 #define credentials
 
