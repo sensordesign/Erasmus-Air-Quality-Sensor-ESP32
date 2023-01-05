@@ -7,6 +7,7 @@
 //#include <SoftwareSerial.h>
 
 
+#include "credentials.h"  
 
 //****************************OTA UPDATES****************************//
 // Over the air updates through a web page
@@ -22,16 +23,16 @@
 #include "timeawake.h"
 #include <NTPClient.h>
 #include <WiFiUdp.h>
-int deepsleepTime=0;
+int deepsleepTime = 0;
 
 //****************************WIFI****************************//
 // This should be substituted with ESP_Now On Satellites devices so to have just one Esp connected to wifi// MAYBE NOT
 // Include the libraries for wifi
 #include <WiFi.h>
 // WiFi AP SSID
-#define WIFI_SSID "Infostrada-9398E1"
+char *WIFI_SSID = wifi_name();
 // WiFi password
-#define WIFI_PASSWORD "BDLMD8P73D"
+char *WIFI_PASSWORD = wifi_PWD();
 
 
 //****************************INFLUX DB****************************//
@@ -39,10 +40,10 @@ int deepsleepTime=0;
 #include <InfluxDbClient.h>
 #include <InfluxDbCloud.h>
 // INFLUXDB Setups where to write
-#define INFLUXDB_URL "https://europe-west1-1.gcp.cloud2.influxdata.com"
-#define INFLUXDB_TOKEN "sfxn7YKbhdghIoSXpakejuUUAXcBwfW-TNu1JEIT3wmeorda1BcXm_pZJW5DAXNKV7x_y23Irponc5lbW5k3JA=="
-#define INFLUXDB_ORG "8f7a0a2a53c35db0"
-#define INFLUXDB_BUCKET "sensor_data_test"
+char *INFLUXDB_URL=iNFLUXDB_URL();
+char *INFLUXDB_TOKEN=iNFLUXDB_TOKEN();
+char *INFLUXDB_ORG=iNFLUXDB_ORG();
+char *INFLUXDB_BUCKET=iNFLUXDB_BUCKET();
 // Time zone info
 #define TZ_INFO "UTC1"
 // Declare InfluxDB client instance with preconfigured InfluxCloud certificate
