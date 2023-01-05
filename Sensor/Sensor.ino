@@ -1,14 +1,28 @@
 //****************************SENSORS****************************//
 // Include Libraries for sensors and sensor readings
-#include <WEMOS_SHT3X.h>
-#include "SdsDustSensor.h"
+//#include <WEMOS_SHT3X.h>
+//#include "SdsDustSensor.h"
+//#include <DHT.h>
 #include "Sensor_retrievement.h"
+//#include <SoftwareSerial.h>
+
+
+
+//****************************OTA UPDATES****************************//
+// Over the air updates through a web page
+#include "OTA_updates.h"
+#include <WiFiClient.h>
+#include <WebServer.h>
+#include <ESPmDNS.h>
+#include <Update.h>
+
 
 //****************************TIME****************************//
 // Include Libraries for time and sleeping
 #include "timeawake.h"
 #include <NTPClient.h>
 #include <WiFiUdp.h>
+int deepsleepTime=0;
 
 //****************************WIFI****************************//
 // This should be substituted with ESP_Now On Satellites devices so to have just one Esp connected to wifi// MAYBE NOT
@@ -68,9 +82,10 @@ void setup() {
   // Add tags to the data point
   sensor_readings.addTag("device", "Esp32-Kri-Prova");
   sds_setup();
+  setup_ota();
 }
-int deepsleepTime=0;
 void loop() {
+  loop_ota();
   // Clear fields for reusing the point. Tags will remain the same as set above.
   sensor_readings.clearFields();
 
@@ -99,12 +114,13 @@ void loop() {
     Serial.print("InfluxDB write failed: ");
     Serial.println(client.getLastErrorMessage());
   }
-
+  delay(5000);
+  /*
   Serial.print("Waiting ");
   Serial.print(getdeepsleep());
   Serial.println(" Second");
   delay(getdeepsleep() * 1000);
-  // //USE FOR DEEP SLEEP ONLY
-  // esp_sleep_enable_timer_wakeup(getdeepsleep() * 1000000);
-  // esp_deep_sleep_start();
+  //USE FOR DEEP SLEEP ONLY
+  esp_sleep_enable_timer_wakeup(getdeepsleep() * 1000000);
+  esp_deep_sleep_start();*/
 }

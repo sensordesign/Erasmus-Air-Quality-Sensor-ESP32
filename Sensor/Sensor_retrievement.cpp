@@ -1,6 +1,21 @@
+
 #include "Sensor_retrievement.h"
 #include <WEMOS_SHT3X.h>
+#include <DHT.h>
+#include <Arduino.h>
+/*
+#include <SoftwareSerial.h>
+*/
+/*
+#define DHTPIN 5
+#define DHTTYPE DHT11
+DHT dht(DHTPIN, DHTTYPE);
+#define D3 0
+#define D4 2
+
+SoftwareSerial co2Serial(D3, D4); // define MH-Z19 RX TX D3 (GPIO0) and D4 (GPIO2)
 SHT3X sht30(0x45);
+*/
 /*
 #include "SdsDustSensor.h"
 
@@ -48,25 +63,22 @@ void sds_setup(){/*
 }
 
 double temperature()
-{
-  /*
-  return sht30.cTemp - offset;
+{/*
+return dht.readTemperature();
 */
-return random(-1000,2000)/100.00;
+return random(10000,20000)/100.00;
 }
 double co2()
 {
   /*
-  return sht30.cTemp - offset;
+  return sht30.co2 - offset;
 */
 return random(10000,20000)/100.00;
 }
 double humidity()
-{
-  /*
-  return sht30.humidity;
-*/
-return random(0,10000)/100.00;
+{/*
+return dht.readHumidity();*/
+return random(10000,20000)/100.00;
 }
 double pm2_5()
 {
