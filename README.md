@@ -1,13 +1,13 @@
 # Sensors pack for Esp32 With OTA updates via WEB
 
 ## Before Compiling and uploading to Arduino
-Create 2 files named config.h and config.cpp and put them in src/config/ \
+Create 2 files named credentials.h and credentials.cpp \
 The asterisk is where you should input your own information \
 Those files need to be created using the structures indicated below \
 Also include the libraries for the sensors and modify any eventual difference in pinout structures 
-### config.cpp
+### credentials.cpp
 ```
-#include "config.h"
+#include "credentials.h"
 
 char *wifi_name() {
   return "**"; // wifi name
@@ -31,10 +31,10 @@ bool wantdeepSleep(){
   return false; // insert whether you want to go to deep sleep or not. the latter is useful for installations which are not permanent
 }
 ```
-### config.h
+### credentials.h
 ```
-#ifndef config
-#define config
+#ifndef credentials
+#define credentials
 
 char *wifi_name();
 char *wifi_PWD();
