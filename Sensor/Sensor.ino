@@ -3,26 +3,24 @@
 //#include <WEMOS_SHT3X.h>
 //#include "SdsDustSensor.h"
 //#include <DHT.h>
-#include "src/sensor_retrievement/Sensor_retrievement.h"
+#include "src\sensor_retrievement\Sensor_retrievement.h"
 //#include <SoftwareSerial.h>
-
-
-#include "src/config/config.h"
+#include "src\config\config.h"
 
 //****************************OTA UPDATES****************************//
 // Over the air updates through a web page
-#include "src/ota_updates/OTA_updates.h"
 #include <WiFiClient.h>
 #include <WebServer.h>
 #include <ESPmDNS.h>
 #include <Update.h>
+#include "src\ota_updates\OTA_updates.h"
 
 
 //****************************TIME****************************//
 // Include Libraries for time and sleeping
-#include "src/timeawake/timeawake.h"
 #include <NTPClient.h>
 #include <WiFiUdp.h>
+#include "src\timeawake\timeawake.h"
 int deepsleepTime = 0;
 
 //****************************WIFI****************************//
