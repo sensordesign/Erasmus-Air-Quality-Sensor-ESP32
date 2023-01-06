@@ -7,7 +7,7 @@
 //#include <SoftwareSerial.h>
 
 
-#include "src/credentials/credentials.h"  
+#include "src/config/config.h"
 
 //****************************OTA UPDATES****************************//
 // Over the air updates through a web page
@@ -40,10 +40,10 @@ char *WIFI_PASSWORD = wifi_PWD();
 #include <InfluxDbClient.h>
 #include <InfluxDbCloud.h>
 // INFLUXDB Setups where to write
-char *INFLUXDB_URL=iNFLUXDB_URL();
-char *INFLUXDB_TOKEN=iNFLUXDB_TOKEN();
-char *INFLUXDB_ORG=iNFLUXDB_ORG();
-char *INFLUXDB_BUCKET=iNFLUXDB_BUCKET();
+char *INFLUXDB_URL = iNFLUXDB_URL();
+char *INFLUXDB_TOKEN = iNFLUXDB_TOKEN();
+char *INFLUXDB_ORG = iNFLUXDB_ORG();
+char *INFLUXDB_BUCKET = iNFLUXDB_BUCKET();
 // Time zone info
 #define TZ_INFO "UTC1"
 // Declare InfluxDB client instance with preconfigured InfluxCloud certificate
@@ -115,13 +115,11 @@ void loop() {
     Serial.print("InfluxDB write failed: ");
     Serial.println(client.getLastErrorMessage());
   }
-  delay(5000);
-  /*
-  Serial.print("Waiting ");
-  Serial.print(getdeepsleep());
-  Serial.println(" Second");
-  delay(getdeepsleep() * 1000);
-  //USE FOR DEEP SLEEP ONLY
-  esp_sleep_enable_timer_wakeup(getdeepsleep() * 1000000);
-  esp_deep_sleep_start();*/
+  if (wantdeepSleep()) {
+    Serial.print("Waiting ");
+    Serial.print(getdeepsleep());
+    Serial.println(" Second");
+    delay(getdeepsleep() * 1000);
+  } else
+    delay(5000);
 }
