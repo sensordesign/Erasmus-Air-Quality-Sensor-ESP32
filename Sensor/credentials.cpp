@@ -20,3 +20,7 @@ char *iNFLUXDB_ORG() {
 char *iNFLUXDB_BUCKET(){
   return "sensor_data_test";
 }
+bool wantdeepSleep(){
+  return false; // insert whether you want to go to deep sleep or not. the latter is useful for installations which are not permanent
+}
+bool wantdeepSleep();

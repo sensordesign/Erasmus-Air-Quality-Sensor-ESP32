@@ -1,11 +1,10 @@
 //****************************SENSORS****************************//
 // Include Libraries for sensors and sensor readings
-//#include <WEMOS_SHT3X.h>
-//#include "SdsDustSensor.h"
-//#include <DHT.h>
-#include "src\sensor_retrievement\Sensor_retrievement.h"
-//#include <SoftwareSerial.h>
-#include "src\config\config.h"
+#include <WEMOS_SHT3X.h>
+#include <DHT.h>
+#include "Sensor_retrievement.h"
+#include <SoftwareSerial.h>
+#include "credentials.h"
 
 //****************************OTA UPDATES****************************//
 // Over the air updates through a web page
@@ -13,14 +12,14 @@
 #include <WebServer.h>
 #include <ESPmDNS.h>
 #include <Update.h>
-#include "src\ota_updates\OTA_updates.h"
+#include "OTA_updates.h"
 
 
 //****************************TIME****************************//
 // Include Libraries for time and sleeping
 #include <NTPClient.h>
 #include <WiFiUdp.h>
-#include "src\timeawake\timeawake.h"
+#include "timeawake.h"
 int deepsleepTime = 0;
 
 //****************************WIFI****************************//
@@ -80,9 +79,9 @@ void setup() {
 
   // Add tags to the data point
   sensor_readings.addTag("device", "Esp32-Kri-Prova");
-  sds_setup();
   setup_ota();
 }
+
 void loop() {
   loop_ota();
   // Clear fields for reusing the point. Tags will remain the same as set above.
