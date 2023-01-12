@@ -1,9 +1,9 @@
 #include <Arduino.h>
 #include <SoftwareSerial.h>
-#define D3 0
-#define D4 2
+#define D3 3 //tested pins for esp32
+#define D4 21
 
-SoftwareSerial co2Serial(D3, D4);  // define MH-Z19 RX TX D3 (GPIO0) and D4 (GPIO2)
+SoftwareSerial co2Serial(D3, D4);  // define MH-Z19 RX TX D3 (GPIO3) and D4 (GPIO21)
 
 void setup() {
   // put your setup code here, to run once:
