@@ -1,7 +1,6 @@
 //****************************SENSORS****************************//
 // Include Libraries for sensors and sensor readings
 #include "DHT.h"
-
 #include "Sensor_retrievement.h"
 #include <SoftwareSerial.h>
 #include "credentials.h"
@@ -27,9 +26,9 @@ int deepsleepTime = 0;
 // Include the libraries for wifi
 #include <WiFi.h>
 // WiFi AP SSID
-#define WIFI_SSID "Linkem2.4GHz_8B464B"
+#define WIFI_SSID "Redmi Note 11S"
 // WiFi password
-#define WIFI_PASSWORD "hgmmjksj"
+#define WIFI_PASSWORD "sebastian86"
 
 
 //****************************INFLUX DB****************************//
@@ -49,7 +48,7 @@ InfluxDBClient client(INFLUXDB_URL, INFLUXDB_ORG, INFLUXDB_BUCKET, INFLUXDB_TOKE
 Point sensor_readings("measurements");
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
   // Setup wifi
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
 
@@ -84,6 +83,7 @@ void setup() {
 
 void loop() {
   loop_ota();
+  Serial.print(readCO2UART());
   // Clear fields for reusing the point. Tags will remain the same as set above.
   sensor_readings.clearFields();
 
@@ -118,5 +118,5 @@ void loop() {
     Serial.println(" Second");
     delay(getdeepsleep() * 1000);
   } else
-    delay(5000);
+    delay(15000);
 }

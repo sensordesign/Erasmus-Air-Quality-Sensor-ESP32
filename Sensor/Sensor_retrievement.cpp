@@ -160,7 +160,7 @@ int readCO2UART() {
   // clear the buffer
   memset(response, 0, 9);
   int i = 0;
-  while (co2Serial.available() == 0 && i < 10) {
+  while ((co2Serial.available() == 0) && (i < 20)) {
 
     Serial.print("Waiting for response ");
     Serial.print(i);

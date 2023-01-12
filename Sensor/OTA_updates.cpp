@@ -52,7 +52,7 @@ const char* serverIndex =
  * setup function
  */
 void setup_ota() {
-  Serial.begin(115200);
+  Serial.begin(9600);
 
   /*use mdns for host name resolution*/
   if (!MDNS.begin(host)) { //http://esp32.local
