@@ -1,9 +1,6 @@
 //****************************SENSORS****************************//
 // Include Libraries for sensors and sensor readings
 #include "DHT.h"
-#define DHTPIN 5
-#define DHTTYPE DHT11
-DHT dht(DHTPIN, DHTTYPE);
 
 #include "Sensor_retrievement.h"
 #include <SoftwareSerial.h>
@@ -30,9 +27,9 @@ int deepsleepTime = 0;
 // Include the libraries for wifi
 #include <WiFi.h>
 // WiFi AP SSID
-char *WIFI_SSID = wifi_name();
+#define WIFI_SSID "Linkem2.4GHz_8B464B"
 // WiFi password
-char *WIFI_PASSWORD = wifi_PWD();
+#define WIFI_PASSWORD "hgmmjksj"
 
 
 //****************************INFLUX DB****************************//
@@ -40,10 +37,10 @@ char *WIFI_PASSWORD = wifi_PWD();
 #include <InfluxDbClient.h>
 #include <InfluxDbCloud.h>
 // INFLUXDB Setups where to write
-char *INFLUXDB_URL = iNFLUXDB_URL();
-char *INFLUXDB_TOKEN = iNFLUXDB_TOKEN();
-char *INFLUXDB_ORG = iNFLUXDB_ORG();
-char *INFLUXDB_BUCKET = iNFLUXDB_BUCKET();
+#define INFLUXDB_URL "https://europe-west1-1.gcp.cloud2.influxdata.com"
+#define INFLUXDB_TOKEN "TcfzPq142TWxAC7D9cjkcza0KWNvb5HU9DrwDYg6zX0L4x6hs9Bft8h077KJHpVdiz9kDHEjAcUzcNNWqomj9g=="
+#define INFLUXDB_ORG "2e1bcae08357dacf"
+#define INFLUXDB_BUCKET "Sensor"
 // Time zone info
 #define TZ_INFO "UTC1"
 // Declare InfluxDB client instance with preconfigured InfluxCloud certificate

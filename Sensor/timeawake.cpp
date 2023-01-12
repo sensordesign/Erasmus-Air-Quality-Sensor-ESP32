@@ -16,13 +16,13 @@ void timesetup() {
 }
 int getdeepsleep() {
   int h = timeClient.getHours(), m = timeClient.getMinutes(), Deepsleep = 0;
-  if ((h >= 0) && (h < 4) || (h >= 20) && (h < 24)) {
+  if (((h >= 0) && (h < 4)) || ((h >= 20) && (h < 24))) {
     Deepsleep = interval[0];
   }
   if ((h >= 17) && (h < 20)) {
     Deepsleep = interval[1];
   }
-  if ((h >= 4) && (h < 6) || (h >= 15) && (h < 17) || (h >= 10) && (h < 12)) {
+  if (((h >= 4) && (h < 6)) || ((h >= 15) && (h < 17)) || ((h >= 10) && (h < 12))) {
     Deepsleep = interval[2];
   }
   if ((h == 6) || (h == 9) || (h == 14)) {

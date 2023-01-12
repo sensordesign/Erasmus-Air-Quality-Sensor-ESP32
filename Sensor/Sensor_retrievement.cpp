@@ -4,7 +4,7 @@
 #include <SoftwareSerial.h>
 #define DHTPIN 5
 #define DHTTYPE DHT11
-DHT dht(DHTPIN, DHTTYPE);
+DHT DHT1(DHTPIN, DHTTYPE);
 #define D3 3
 #define D4 21
 
@@ -27,13 +27,14 @@ int pm25_table[pm_tablesize];
 int pm10_table[pm_tablesize];
 
 bool is_SDS_running = true;
+
 int PM25;
 int PM10;
 
 void instruments_setup() {
   co2Serial.begin(9600);
   Serial.println(F("DHTxx test!"));
-  dht.begin();
+  DHT1.begin();
 }
 
 void start_SDS() {
@@ -80,13 +81,13 @@ void sds_setup() {
 }
 
 double temperature() {
-  return dht.readTemperature();
+  return DHT1.readTemperature();
 }
 double co2() {
   return readCO2UART();
 }
 double humidity() {
-  return dht.readHumidity();
+  return DHT1.readHumidity();
 }
 int pm2_5() {
   return PM25;
@@ -123,15 +124,15 @@ int sds_loop() {
 
   sds011.on_query_data_auto_completed([](int n) {
     Serial.println("Begin Handling SDS011 query data");
-    int pm25;
-    int pm10;
+    int PM25;
+    int PM10;
     Serial.print("n = "); Serial.println(n);
-    if (sds011.filter_data(n, pm25_table, pm10_table, pm25, pm10) &&
-        !isnan(pm10) && !isnan(pm25)) {
+    if (sds011.filter_data(n, pm25_table, pm10_table, PM25, PM10) &&
+        !isnan(PM10) && !isnan(PM25)) {
       Serial.print("PM10: ");
-      Serial.println(float(pm10) / 10);
+      Serial.println(float(PM10) / 10);
       Serial.print("PM2.5: ");
-      Serial.println(float(pm25) / 10);
+      Serial.println(float(PM25) / 10);
     }
     Serial.println("End Handling SDS011 query data");
   });
@@ -146,8 +147,6 @@ int sds_loop() {
     Serial.println(static_cast<int32_t>(deadline - millis()) / 1000);
     sds011.perform_work();
   }
-  PM10 = pm10;
-  PM25 = pm25;
   return PM10;
   return PM25;
 }

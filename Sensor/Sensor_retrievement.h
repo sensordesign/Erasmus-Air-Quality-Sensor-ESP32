@@ -1,7 +1,6 @@
 #ifndef Sensor_retrievement
 #define Sensor_retrievement
 #include <Arduino.h>
-#include <WEMOS_SHT3X.h>
 #include "DHT.h"
 #include <SoftwareSerial.h>
 
