@@ -5,13 +5,16 @@
 #include <DHT.h>
 #include <SoftwareSerial.h>
 
+void start_SDS();
+void stop_SDS();
 void sds_setup();
 void instruments_setup();
 double temperature();
 double co2();
 double humidity();
-double pm2_5();
 double pm10();
+double pm2_5();
 byte getCheckSum(char *packet);
 int readCO2UART();
+int sds_loop();
 #endif

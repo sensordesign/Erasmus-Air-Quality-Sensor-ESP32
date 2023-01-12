@@ -80,6 +80,8 @@ void setup() {
   // Add tags to the data point
   sensor_readings.addTag("device", "Esp32-Kri-Prova");
   setup_ota();
+  Serial.println(F("DHTxx test!"));
+  dht.begin();
 }
 
 void loop() {
