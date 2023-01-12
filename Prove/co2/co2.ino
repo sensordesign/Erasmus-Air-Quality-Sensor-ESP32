@@ -3,7 +3,7 @@
 #define D3 3 //tested pins for esp32
 #define D4 21
 
-SoftwareSerial co2Serial(D3, D4);  // define MH-Z19 RX TX D3 (GPIO3) and D4 (GPIO21)
+SoftwareSerial co2Serial(D3, D4);  // define MH-Z19 RX D3 (GPIO3) and TX D4 (GPIO21)
 
 void setup() {
   // put your setup code here, to run once:

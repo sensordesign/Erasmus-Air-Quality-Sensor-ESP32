@@ -1,0 +1,22 @@
+                                         Pins of sensors for ESP32 (ESP32 Dev Module)
+
+
+MHZ19-B (CO2): 
+
+RX: GPIO3
+TX: GPIO21
+
+------------------------
+
+DHT11  (Temperature/Humidity):
+
+S: GPIO5
+
+------------------------
+
+SDS011  (PM10/2.5):
+
+RX: GPIO15
+TX: GPIO13
+
+------------------------
