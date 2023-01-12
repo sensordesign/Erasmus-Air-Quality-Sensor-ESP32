@@ -1,7 +1,10 @@
 //****************************SENSORS****************************//
 // Include Libraries for sensors and sensor readings
-#include <WEMOS_SHT3X.h>
-#include <DHT.h>
+#include "DHT.h"
+#define DHTPIN 5
+#define DHTTYPE DHT11
+DHT dht(DHTPIN, DHTTYPE);
+
 #include "Sensor_retrievement.h"
 #include <SoftwareSerial.h>
 #include "credentials.h"
@@ -80,8 +83,6 @@ void setup() {
   // Add tags to the data point
   sensor_readings.addTag("device", "Esp32-Kri-Prova");
   setup_ota();
-  Serial.println(F("DHTxx test!"));
-  dht.begin();
 }
 
 void loop() {

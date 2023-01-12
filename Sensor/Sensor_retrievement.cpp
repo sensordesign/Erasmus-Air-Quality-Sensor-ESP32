@@ -32,6 +32,8 @@ int PM10;
 
 void instruments_setup() {
   co2Serial.begin(9600);
+  Serial.println(F("DHTxx test!"));
+  dht.begin();
 }
 
 void start_SDS() {
@@ -86,10 +88,10 @@ double co2() {
 double humidity() {
   return dht.readHumidity();
 }
-double pm2_5() {
+int pm2_5() {
   return PM25;
 }
-double pm10() {
+int pm10() {
   return PM10;
 }
 int sds_loop() {
@@ -144,6 +146,10 @@ int sds_loop() {
     Serial.println(static_cast<int32_t>(deadline - millis()) / 1000);
     sds011.perform_work();
   }
+  PM10 = pm10;
+  PM25 = pm25;
+  return PM10;
+  return PM25;
 }
 
 int readCO2UART() {
