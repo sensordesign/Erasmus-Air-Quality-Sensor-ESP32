@@ -27,8 +27,8 @@ int pm25_table[pm_tablesize];
 int pm10_table[pm_tablesize];
 
 bool is_SDS_running = true;
-int pm25;
-int pm10;
+int PM25;
+int PM10;
 
 void instruments_setup() {
   co2Serial.begin(9600);
@@ -87,10 +87,10 @@ double humidity() {
   return dht.readHumidity();
 }
 double pm2_5() {
-  return pm25;
+  return PM25;
 }
 double pm10() {
-  return pm10;
+  return PM10;
 }
 int sds_loop() {
   // Per manufacturer specification, place the sensor in standby to prolong service life.

@@ -2,7 +2,7 @@
 #define Sensor_retrievement
 #include <Arduino.h>
 #include <WEMOS_SHT3X.h>
-#include <DHT.h>
+#include "DHT.h"
 #include <SoftwareSerial.h>
 
 void start_SDS();
