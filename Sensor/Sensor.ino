@@ -83,12 +83,12 @@ void setup() {
 
 void loop() {
   loop_ota();
-  Serial.print(readCO2UART());
+  Serial.print(readco2());
   // Clear fields for reusing the point. Tags will remain the same as set above.
   sensor_readings.clearFields();
 
   sensor_readings.addField("Temperature", temperature()); /*Get Data from a class which retrieves data from the temperature sensor*/
-  sensor_readings.addField("co2", co2());                 /*Get Data from a class which retrieves data from the co2 sensor*/
+  sensor_readings.addField("co2", co2());                /*Get Data from a class which retrieves data from the co2 sensor*/
   sensor_readings.addField("humidity", humidity());       /*Get Data from a class which retrieves data from the humidity sensor*/
   sds_setup();
   sensor_readings.addField("pm2_5", pm2_5()); /*Get Data from a class which retrieves data from the PM2_5 sensor*/

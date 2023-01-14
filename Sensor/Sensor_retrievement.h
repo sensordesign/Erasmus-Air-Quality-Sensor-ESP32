@@ -13,7 +13,6 @@ double co2();
 double humidity();
 int pm10();
 int pm2_5();
-byte getCheckSum(char *packet);
-int readCO2UART();
+int readco2();
 int sds_loop();
 #endif
