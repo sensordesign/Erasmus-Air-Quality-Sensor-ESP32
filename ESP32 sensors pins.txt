@@ -16,7 +16,7 @@ S: GPIO5
 
 SDS011  (PM10/2.5):
 
-RX: GPIO15
-TX: GPIO13
+RX: TX2
+TX: RX2
 
 ------------------------
