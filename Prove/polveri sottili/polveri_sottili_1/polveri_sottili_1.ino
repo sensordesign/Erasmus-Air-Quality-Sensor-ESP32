@@ -1,11 +1,11 @@
 #include <SoftwareSerial.h>
 #include <Sds011.h>
 
-#define SDS_PIN_RX 15 //tested pins for esp32
-#define SDS_PIN_TX 13
+#define SDS_PIN_RX 17 //tested pins for esp32
+#define SDS_PIN_TX 16
 
 #ifdef ESP32
-HardwareSerial& serialSDS(Serial2);
+HardwareSerial serialSDS(2);
 Sds011Async< HardwareSerial > sds011(serialSDS);
 #else
 SoftwareSerial serialSDS;
