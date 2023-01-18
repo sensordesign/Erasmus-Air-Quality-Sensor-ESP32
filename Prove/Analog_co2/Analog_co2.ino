@@ -17,7 +17,7 @@
 
 #define ANALOGPIN 34                                          // ADC pin which the brown wire is attached to
 
-unsigned long myMHZ19Timer = 0;
+unsigned long myMHZ19Timer = 1000;
 
 void setup()
 {
@@ -33,11 +33,11 @@ void loop()
 {
     if (millis() - myMHZ19Timer >= 2000)
     {
-        Serial.println("-----------------");
+        //Serial.println("-----------------");
 
         float adjustedADC = analogRead(A0);
-        Serial.print("Analog raw: ");
-        Serial.println(adjustedADC);
+        //Serial.print("Analog raw: ");
+        //Serial.println(adjustedADC);
 
         adjustedADC = 6.4995*adjustedADC - 590.53; // format; y=mx+c
         Serial.print("Analog CO2: ");

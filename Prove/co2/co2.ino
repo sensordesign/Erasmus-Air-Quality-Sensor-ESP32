@@ -3,17 +3,32 @@
 #define D3 3 //tested pins for esp32
 #define D4 21
 
+#include "BluetoothSerial.h"
+
+#if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
+#error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
+#endif
+
+#if !defined(CONFIG_BT_SPP_ENABLED)
+#error Serial Bluetooth not available or not enabled. It is only available for the ESP32 chip.
+#endif
+
+BluetoothSerial SerialBT;
+
 SoftwareSerial co2Serial(D3, D4);  // define MH-Z19 RX D3 (GPIO3) and TX D4 (GPIO21)
 
 void setup() {
   // put your setup code here, to run once:
   co2Serial.begin(9600);
   Serial.begin(9600);
+  SerialBT.begin("ESP32test"); //Bluetooth device name
+  Serial.println("The device started, now you can pair it with bluetooth!");
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   Serial.print(readCO2UART());
+  delay(5000);
 }
 
 int readCO2UART() {
@@ -30,6 +45,9 @@ int readCO2UART() {
        Serial.print("Waiting for response ");
        Serial.print(i);
         Serial.println(" s");
+       SerialBT.print("Waiting for response ");
+       SerialBT.print(i);
+        SerialBT.println(" s");
     delay(1000);
     i++;
   }
@@ -56,10 +74,14 @@ int readCO2UART() {
   int ppm_uart = 256 * (int)response[2] + response[3];
   Serial.print("UART CO2 PPM: ");
   Serial.println(ppm_uart);
+  SerialBT.print("UART CO2 PPM: ");
+  SerialBT.println(ppm_uart);
   // temp
   byte temp = response[4] - 40;
   Serial.print("Sensor Temperature: ");
   Serial.println(temp);
+  SerialBT.print("Sensor Temperature: ");
+  SerialBT.println(temp);
   // status
   byte status = response[5];
   Serial.print("Status: ");
