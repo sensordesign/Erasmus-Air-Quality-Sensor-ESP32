@@ -4,9 +4,6 @@
 #include "DHT.h"
 #include <SoftwareSerial.h>
 
-void start_SDS();
-void stop_SDS();
-void sds_setup();
 void instruments_setup();
 double temperature();
 double co2();

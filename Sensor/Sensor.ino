@@ -90,7 +90,6 @@ void loop() {
   sensor_readings.addField("Temperature", temperature()); /*Get Data from a class which retrieves data from the temperature sensor*/
   sensor_readings.addField("co2", co2());                /*Get Data from a class which retrieves data from the co2 sensor*/
   sensor_readings.addField("humidity", humidity());       /*Get Data from a class which retrieves data from the humidity sensor*/
-  sds_setup();
   sensor_readings.addField("pm2_5", pm2_5()); /*Get Data from a class which retrieves data from the PM2_5 sensor*/
   sensor_readings.addField("pm10", pm10());   /*Get Data from a class which retrieves data from the pm10 sensor*/
   sensor_readings.addField("Limite PM10", 40.00);
