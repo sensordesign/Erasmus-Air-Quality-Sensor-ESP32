@@ -28,7 +28,7 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   Serial.print(readCO2UART());
-  delay(5000);
+  delay(10000);
 }
 
 int readCO2UART() {
