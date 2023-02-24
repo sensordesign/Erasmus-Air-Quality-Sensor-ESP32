@@ -26,8 +26,8 @@ int CO2;
 #include <ESPAsyncWebServer.h>
 #include <AsyncElegantOTA.h>
 
-const char* ssid = "TOTOLINK N200RE";
-const char* password = "";
+const char* ssid = "vallauri.docenti";
+const char* password = "fossano-vallauri";
 
 AsyncWebServer server(80);
 
@@ -61,9 +61,9 @@ WiFiMulti wifiMulti;
 #include <InfluxDbCloud.h>
 
 
-#define WIFI_SSID "Redmi Note 11S"
+#define WIFI_SSID "vallauri.docenti"
 
-#define WIFI_PASSWORD "sebastian86"
+#define WIFI_PASSWORD "fossano-vallauri"
 #define INFLUXDB_URL "https://europe-west1-1.gcp.cloud2.influxdata.com"
 #define INFLUXDB_TOKEN "TcfzPq142TWxAC7D9cjkcza0KWNvb5HU9DrwDYg6zX0L4x6hs9Bft8h077KJHpVdiz9kDHEjAcUzcNNWqomj9g=="
 #define INFLUXDB_ORG "2e1bcae08357dacf"
@@ -72,7 +72,7 @@ WiFiMulti wifiMulti;
 //  Central Europe: "CET-1CEST,M3.5.0,M10.5.0/3"
 #define TZ_INFO "CET-1CEST,M3.5.0,M10.5.0/3"
 InfluxDBClient client(INFLUXDB_URL, INFLUXDB_ORG, INFLUXDB_BUCKET, INFLUXDB_TOKEN, InfluxDbCloud2CACert);
-Point sensor_readings("measurements");
+Point sensor_readings("Red sensor");
 
 void setup() {
   Serial.begin(9600);                                     // Device to serial monitor feedback
@@ -156,7 +156,7 @@ void loop() {
 
     sensor_readings.clearFields();
     sensor_readings.addField("rssi", WiFi.RSSI());
-    sensor_readings.addField("Temperature", t); /*Get Data from a class which retrieves data from the temperature sensor*/
+    sensor_readings.addField("Temperature", Temp); /*Get Data from a class which retrieves data from the temperature sensor*/
     sensor_readings.addField("co2", CO2);                /*Get Data from a class which retrieves data from the co2 sensor*/
     sensor_readings.addField("humidity", h);       /*Get Data from a class which retrieves data from the humidity sensor*/
     sensor_readings.addField("pm2_5", p25); /*Get Data from a class which retrieves data from the PM2_5 sensor*/
