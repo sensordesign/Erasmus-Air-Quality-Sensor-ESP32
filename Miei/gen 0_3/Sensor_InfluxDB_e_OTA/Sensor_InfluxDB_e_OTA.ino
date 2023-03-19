@@ -26,8 +26,8 @@ int CO2;
 #include <ESPAsyncWebServer.h>
 #include <AsyncElegantOTA.h>
 
-const char* ssid = "vallauri.docenti";
-const char* password = "fossano-vallauri";
+const char* ssid = "Linkem2.4GHz_8B464B";
+const char* password = "hgmmjksj";
 
 AsyncWebServer server(80);
 
@@ -55,24 +55,24 @@ DHT dht(DHTPIN, DHTTYPE);
 
 #include <WiFiMulti.h>
 WiFiMulti wifiMulti;
-#define DEVICE "ESP32"
+#define DEVICE "Air sensor"
 
 #include <InfluxDbClient.h>
 #include <InfluxDbCloud.h>
 
 
-#define WIFI_SSID "vallauri.docenti"
+#define WIFI_SSID "Linkem2.4GHz_8B464B"
 
-#define WIFI_PASSWORD "fossano-vallauri"
+#define WIFI_PASSWORD "hgmmjksj"
 #define INFLUXDB_URL "https://europe-west1-1.gcp.cloud2.influxdata.com"
-#define INFLUXDB_TOKEN "TcfzPq142TWxAC7D9cjkcza0KWNvb5HU9DrwDYg6zX0L4x6hs9Bft8h077KJHpVdiz9kDHEjAcUzcNNWqomj9g=="
+#define INFLUXDB_TOKEN "yMxQUGByJ_wyVezcmVuAGxJqLQgekUJMowcTL0cxpPRb7GJ0uBXtnbmNxCuacGMoVSTCCodhl9qEWruiYiCtmA=="
 #define INFLUXDB_ORG "2e1bcae08357dacf"
 #define INFLUXDB_BUCKET "Sensor"
 // Set timezone string according to https://www.gnu.org/software/libc/manual/html_node/TZ-Variable.html
 //  Central Europe: "CET-1CEST,M3.5.0,M10.5.0/3"
 #define TZ_INFO "CET-1CEST,M3.5.0,M10.5.0/3"
 InfluxDBClient client(INFLUXDB_URL, INFLUXDB_ORG, INFLUXDB_BUCKET, INFLUXDB_TOKEN, InfluxDbCloud2CACert);
-Point sensor_readings("Red sensor");
+Point sensor_readings("Air quality");
 
 void setup() {
   Serial.begin(9600);                                     // Device to serial monitor feedback
@@ -100,8 +100,10 @@ void setup() {
   Serial.println("HTTP server started");
 
   // Add tags
-  sensor_readings.addTag("device", "Esp32-Kri-Prova");
-
+  sensor_readings.addTag("device", DEVICE);
+  sensorReadings.addTag("Location", "Stand");
+  sensorReadings.addTag("sensor", "PM sensor");
+  
   // Alternatively, set insecure connection to skip server certificate validation
   //client.setInsecure();
 
