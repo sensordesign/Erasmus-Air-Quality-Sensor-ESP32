@@ -101,8 +101,8 @@ void setup() {
 
   // Add tags
   sensor_readings.addTag("device", DEVICE);
-  sensorReadings.addTag("Location", "Stand");
-  sensorReadings.addTag("sensor", "PM sensor");
+  sensor_readings.addTag("Location", "Stand");
+  sensor_readings.addTag("sensor", "PM sensor");
   
   // Alternatively, set insecure connection to skip server certificate validation
   //client.setInsecure();
