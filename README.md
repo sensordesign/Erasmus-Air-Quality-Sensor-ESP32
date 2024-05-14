@@ -46,7 +46,3 @@ bool wantdeepSleep();
 
 #endif
 ```
-test
-```
-#define "arduino.h"
-```
