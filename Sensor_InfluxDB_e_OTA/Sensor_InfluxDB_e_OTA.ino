@@ -79,6 +79,7 @@ Point sensor_readings("measurements");
 
 byte i;
 unsigned long s = 30;
+#include "esp_sleep.h"
 
 double Temp;
 
@@ -144,102 +145,105 @@ void loop() {
   s = millis() / 1000;
 
   if (millis() - getDataTimer >= preheat_time) {
-  getDataTimer = millis();
+    getDataTimer = millis();
 
-  err = my_sds.read(&p25, &p10);
-  if (!err) {
-    Serial.print("P2.5: " + String(p25));
-    Serial.println("  P10:  " + String(p10));
-  }
-
-  /* note: getCO2() default is command "CO2 Unlimited". This returns the correct CO2 reading even
-    if below background CO2 levels or above range (useful to validate sensor). You can use the
-    usual documented command with getCO2(false) */
-  delay(500);
-  CO2 = myMHZ19.getCO2();                             // Request CO2 (as ppm)
-  Serial.print("CO2 (ppm): ");
-  Serial.print(CO2);
-  Temp = myMHZ19.getTemperature();                     // Request Temperature (as Celsius)
-  Serial.print(" Temperature (C): ");
-  Serial.println(Temp);
-
-  double h = dht.readHumidity();
-  double t = dht.readTemperature();
-  // Check if any reads failed and exit early (to try again).
-  if (isnan(h) || isnan(t)) {
-    Serial.println(F("Failed to read from DHT sensor!"));
-  }
-
-  // Compute heat index in Celsius (isFahreheit = false)
-  //float hic = dht.computeHeatIndex(t, h, false);
-  Serial.print(F("Humidity: "));
-  Serial.print(h);
-  Serial.print(F("%  Temperature: "));
-  Serial.print(t);
-  Serial.println(F("°C "));
-  //Serial.print(F("Heat index: "));
-  //Serial.print(hic);
-  //Serial.println(F("°C "));
-  Serial.println("");
-  Serial.println("-----------------------");
-  Serial.println("");
-
-
-  sensor_readings.clearFields();
-  sensor_readings.addField("rssi", WiFi.RSSI());
-  sensor_readings.addField("Temperature", Temp + 4); /*Get Data from a class which retrieves data from the temperature sensor*/
-  sensor_readings.addField("co2", CO2);                /*Get Data from a class which retrieves data from the co2 sensor*/
-  sensor_readings.addField("humidity", h);       /*Get Data from a class which retrieves data from the humidity sensor*/
-  sensor_readings.addField("pm2_5", p25); /*Get Data from a class which retrieves data from the PM2_5 sensor*/
-  sensor_readings.addField("pm10", p10);   /*Get Data from a class which retrieves data from the pm10 sensor*/
-
-  Serial.print("Writing: ");
-  Serial.println(client.pointToLineProtocol(sensor_readings));
-  if (wifiMulti.run() != WL_CONNECTED) {
-    Serial.println("Wifi connection lost");
-  }
-  // Write point
-  if (!client.writePoint(sensor_readings)) {
-    Serial.print("InfluxDB write failed: ");
-    Serial.println(client.getLastErrorMessage());
-
-    //se WiFi non funziona salva nella SPIFFS
-
-    String measurements = "Time: " + String(s) + ", " + "T: " + String(Temp + 4) + ", " + "H: " + String(h) + ", " + "PM10: " + String(p10) + ", " + "PM2.5: " + String(p25) + ", " + "CO2: " + String(CO2) + ", " + + "RSSI: " + String( WiFi.RSSI()) + " \n";
-
-    File file = SPIFFS.open("/PM sensor.txt", FILE_APPEND);
-
-    if (!file) {
-      Serial.println("There was an error opening the file for writing");
-      return;
-    }
-    if (file.print(measurements)) {
-      Serial.println("File was written");
-    } else {
-      Serial.println("File write failed");
+    err = my_sds.read(&p25, &p10);
+    if (!err) {
+      Serial.print("P2.5: " + String(p25));
+      Serial.println("  P10:  " + String(p10));
     }
 
-    file.close();
+    /* note: getCO2() default is command "CO2 Unlimited". This returns the correct CO2 reading even
+      if below background CO2 levels or above range (useful to validate sensor). You can use the
+      usual documented command with getCO2(false) */
+    delay(500);
+    CO2 = myMHZ19.getCO2();                             // Request CO2 (as ppm)
+    Serial.print("CO2 (ppm): ");
+    Serial.print(CO2);
+    Temp = myMHZ19.getTemperature();                     // Request Temperature (as Celsius)
+    Serial.print(" Temperature (C): ");
+    Serial.println(Temp);
 
-    delay(5000);
-
-    File file2 = SPIFFS.open("/PM sensor.txt");
-
-    if (!file2) {
-      Serial.println("Failed to open file for reading");
-      return;
+    double h = dht.readHumidity();
+    double t = dht.readTemperature();
+    // Check if any reads failed and exit early (to try again).
+    if (isnan(h) || isnan(t)) {
+      Serial.println(F("Failed to read from DHT sensor!"));
     }
 
-    Serial.println("File Content:");
+    // Compute heat index in Celsius (isFahreheit = false)
+    //float hic = dht.computeHeatIndex(t, h, false);
+    Serial.print(F("Humidity: "));
+    Serial.print(h);
+    Serial.print(F("%  Temperature: "));
+    Serial.print(t);
+    Serial.println(F("°C "));
+    //Serial.print(F("Heat index: "));
+    //Serial.print(hic);
+    //Serial.println(F("°C "));
+    Serial.println("");
+    Serial.println("-----------------------");
+    Serial.println("");
 
-    while (file2.available()) {
 
-      Serial.write(file2.read());
+    sensor_readings.clearFields();
+    sensor_readings.addField("rssi", WiFi.RSSI());
+    sensor_readings.addField("Temperature", Temp + 4); /*Get Data from a class which retrieves data from the temperature sensor*/
+    sensor_readings.addField("co2", CO2);                /*Get Data from a class which retrieves data from the co2 sensor*/
+    sensor_readings.addField("humidity", h);       /*Get Data from a class which retrieves data from the humidity sensor*/
+    sensor_readings.addField("pm2_5", p25); /*Get Data from a class which retrieves data from the PM2_5 sensor*/
+    sensor_readings.addField("pm10", p10);   /*Get Data from a class which retrieves data from the pm10 sensor*/
+
+    Serial.print("Writing: ");
+    Serial.println(client.pointToLineProtocol(sensor_readings));
+    if (wifiMulti.run() != WL_CONNECTED) {
+      Serial.println("Wifi connection lost");
+    }
+    // Write point
+    if (!client.writePoint(sensor_readings)) {
+      Serial.print("InfluxDB write failed: ");
+      Serial.println(client.getLastErrorMessage());
+
+      //se WiFi non funziona salva nella SPIFFS
+
+      String measurements = "Time: " + String(s) + ", " + "T: " + String(Temp + 4) + ", " + "H: " + String(h) + ", " + "PM10: " + String(p10) + ", " + "PM2.5: " + String(p25) + ", " + "CO2: " + String(CO2) + ", " + + "RSSI: " + String( WiFi.RSSI()) + " \n";
+
+      File file = SPIFFS.open("/PM sensor.txt", FILE_APPEND);
+
+      if (!file) {
+        Serial.println("There was an error opening the file for writing");
+        return;
+      }
+      if (file.print(measurements)) {
+        Serial.println("File was written");
+      } else {
+        Serial.println("File write failed");
+      }
+
+      file.close();
+
+      delay(5000);
+
+      File file2 = SPIFFS.open("/PM sensor.txt");
+
+      if (!file2) {
+        Serial.println("Failed to open file for reading");
+        return;
+      }
+
+      Serial.println("File Content:");
+
+      while (file2.available()) {
+
+        Serial.write(file2.read());
+      }
+
+      file2.close();
     }
 
-    file2.close();
+    Serial.println("Going to sleep now");
+    delay(100);
+    Serial.flush();
+    esp_deep_sleep_start();
   }
-
-  //delay(60000);
-}
 }
