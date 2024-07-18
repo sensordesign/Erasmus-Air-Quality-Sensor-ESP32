@@ -74,8 +74,8 @@ WiFiMulti wifiMulti;
 #define WIFI_PASSWORD "yyyyyyyyyyyyyyyyyyyyy"
 
 #define INFLUXDB_URL "https://us-east-1-1.aws.cloud2.influxdata.com"
-#define INFLUXDB_TOKEN "gJAUSvRK4IE9qQjeys6jE_ymf1O2oA35KooQnxoDyXile2jyUCfeu4lz-GvacR7MmAOTIk5Px2rlJkjNCgudvA=="
-#define INFLUXDB_ORG "edomazzone"
+#define INFLUXDB_TOKEN "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+#define INFLUXDB_ORG "zzzzzzzzzz"
 #define INFLUXDB_BUCKET "Sensor"
 // Set timezone string according to https://www.gnu.org/software/libc/manual/html_node/TZ-Variable.html
 //  Central Europe: "CET-1CEST,M3.5.0,M10.5.0/3"
