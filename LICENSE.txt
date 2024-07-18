@@ -1,0 +1,1 @@
+ Air Quality ESP32: Build a Portable IoT Sensor © 2024 by Mazzone Edoardo is licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International 
