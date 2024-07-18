@@ -1,5 +1,5 @@
 # Air Quality ESP32: Build a Portable IoT Sensor
-Hi everyone! In this repo you will find everything you need to recreate our project, for details visit xxxyyyzzz. This is a starting project about air quality monitoring with ESP32 and SDS011.
+Hi everyone! In this repo you will find everything you need to recreate our project, for details visit the [Instructable](https://www.instructables.com/Air-Quality-ESP32-Build-a-Portable-IoT-Sensor/). This is a starting project about air quality monitoring with ESP32 and SDS011.
 The first things you need are the libraries for sensors, they are in the dedicated directory, then there are "Case and PCB", here you will find the Gerber file and the .dxf one for the cover of the case, we used 4mm wood but you can also print it.
 ## Code
 The sketches for testing if sensors and connection work are in the "Test sketch" directory. 
