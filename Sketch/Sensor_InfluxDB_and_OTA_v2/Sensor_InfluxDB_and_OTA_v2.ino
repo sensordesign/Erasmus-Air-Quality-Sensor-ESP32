@@ -1,6 +1,6 @@
 /*
   Mazzone Edoardo
-  Complete project details at "xxxxxxxxyyyyyyzzzz" (instrucatbles che pubblico)
+  Complete project details at "https://github.com/edomazzone" (instrucatbles che pubblico)
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files.
